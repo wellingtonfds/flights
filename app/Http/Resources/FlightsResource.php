@@ -7,6 +7,27 @@ use Illuminate\Support\Collection;
 
 class FlightsResource extends JsonResource
 {
+    /**
+     * @OA\Schema(
+     *     schema="flights_resource",
+     *     description="The default resource for an User",
+     *     type="object",
+     *     title="Flights",
+     *     @OA\Property(property="groups", type="object",collectionFormat="multi", description="ID", example="1",
+     *       
+     *          @OA\Property(property="“flightGroup", type="object",
+     *              @OA\Property(property="uniqueId", type="int64", description="ID", example="1"),
+     *              @OA\Property(property="totalPrice", type="float", description="preço total", example="1"),
+     *              @OA\Property(property="outbound", type="object", description="grupo"),
+     *              @OA\Property(property="inbound", type="object", description="grupo"),
+     *          ),
+     *     ),
+     *     @OA\Property(property="totalGroups", type="int", description="quantidade total de grupos"),
+     *     @OA\Property(property="totalFlights", type="int", description="quantidade total de voos únicos"),
+     *     @OA\Property(property="cheapestPrice", type="float", description="preço do grupo mais barato"),
+     *     @OA\Property(property="cheapestGroup", type="float", description="id único do grupo mais barato"),
+     * )
+     */
     public static $wrap = 'flights';
     /**
      * Transform the resource into an array.

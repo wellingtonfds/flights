@@ -2,3 +2,7 @@
 .env
 Dockerfile
 database.sqlite
+composer.lock
+resources/views/vendor/l5-swagger/.gitkeep
+storage/api-docs/api-docs.json
+composer.lock
