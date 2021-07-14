@@ -2,6 +2,7 @@
 
 namespace App\Services\flights;
 
+use Faker\Core\Number;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 

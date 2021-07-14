@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FlightsResource;
 use App\Services\flights\FlightsServicesInterface;
 
 class FlightsController extends Controller
 {
-    public function index(FlightsServicesInterface $flightsServices)
+    /**
+     * Return many groups of flights
+     * @return FlightsResource
+     */
+    public function index(FlightsServicesInterface $flightsServices): FlightsResource
     {
-        return $flightsServices->groupFlights();
+        return new FlightsResource($flightsServices->groupFlights());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\flights;
 
+use Faker\Core\Number;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
@@ -29,7 +30,11 @@ class FlightsServices implements FlightsServicesInterface
      */
     public function groupFlights(): Collection
     {
-        return $this->refineGroup($this->groupByFareOutboundPrice($this->get()));
+        $data = $this->get();
+        return new Collection([
+            'group' => $this->refineGroup($this->groupByFareOutboundPrice($data)),
+            'totalFlights' => count($data)
+        ]);
     }
     /**
      * Only group data by fare outbound and price
