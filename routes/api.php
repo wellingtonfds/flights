@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FlightsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
@@ -16,29 +17,30 @@ use Illuminate\Support\Collection;
 |
 */
 
+Route::get('flights', [FlightsController::class, 'index'])->name('flights.index');
+
 Route::get('/test', function (Request $request) {
     $response = Http::get('http://prova.123milhas.net/api/flights');
     $flights = new Collection($response->json());
-    $groupFare = $flights->groupBy(['fare','outbound','price']);
-    $groupFlights = $groupFare->map(function($outbounds){
-    $newGroup = [];
-        
-        foreach($outbounds as $key=>$outbound){
-            foreach($outbound as $price){
-                if($key){
-                $newGroup['outbound'][] = $price;
-                continue;
+    $groupFare = $flights->groupBy(['fare', 'outbound', 'price']);
+    $groupFlights = $groupFare->map(function ($outbounds) {
+        $newGroup = [];
+
+        foreach ($outbounds as $key => $outbound) {
+            foreach ($outbound as $price) {
+                if ($key) {
+                    $newGroup['outbound'][] = $price;
+                    continue;
                 }
                 $newGroup['inbound'][] = $price;
-               
             }
         }
         $groups = [];
-        foreach($newGroup['inbound'] as $inbound){
-            foreach($newGroup['outbound'] as $outbound){
+        foreach ($newGroup['inbound'] as $inbound) {
+            foreach ($newGroup['outbound'] as $outbound) {
                 $groups[] = [
-                    'inbound'=>$inbound,
-                    'outbound'=>$outbound
+                    'inbound' => $inbound,
+                    'outbound' => $outbound
                 ];
             }
         }
@@ -50,5 +52,5 @@ Route::get('/test', function (Request $request) {
 
     // $groupFlights->;
 
-    
+
 });
