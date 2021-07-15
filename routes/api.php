@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\FlightsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Collection;
+
 
 /*
 |--------------------------------------------------------------------------

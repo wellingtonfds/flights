@@ -52,10 +52,10 @@ class FlightsResource extends JsonResource
         $finalGroup = (new Collection($finalGroup))->sortBy('total');
         $key = 0;
         $final = $finalGroup->map(function ($group) use (&$response, &$key) {
-            $key++;
+            ++$key;
             if ($response['cheapestPrice'] === 0 || $group['total'] < $response['cheapestPrice']) {
                 $response['cheapestPrice'] = $group['total'];
-                $group['cheapestGroup'] = $key;
+                $response['cheapestGroup'] = $key;
             }
             return [
                 'uniqueId' => $key,
