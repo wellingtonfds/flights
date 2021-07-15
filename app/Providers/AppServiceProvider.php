@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\flights\FlightsServices;
 use App\Services\flights\FlightsServicesInterface;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (app()->environment('APP_ENV') === 'production') {
-            URL::forceSchema('https');
+        if (App::environment() === "production") {
+            resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
         }
     }
 }
